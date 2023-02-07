@@ -47,7 +47,7 @@ jobs:
           channel: ${{ env.FLUTTER_CHANNEL }}
 
       - name: Build Storybook for Web
-        run: flutter build web --base-href "/sliver_app_bar_builder"
+        run: flutter build web --base-href "/sliver_app_bar_builder/"
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
