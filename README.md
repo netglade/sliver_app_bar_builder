@@ -15,10 +15,10 @@ Developed with 💚 by [netglade][netglade_link]
 
 ---
 
-![](docs/storybook.png)
-
 A truly customizable sliver for app bars with the benefit of using builders.
 Check the [`storybook_flutter` demo](example/README.md) in examples and play with the configuration.
+
+![](screenshots/storybook.png)
 
 ## Getting Started
 
