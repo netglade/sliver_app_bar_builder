@@ -1,10 +1,12 @@
 # sliver_app_bar_builder
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_light.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
-  <img alt="netglade" src="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
-</picture>
+<a href="https://netglade.cz/en">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_light.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
+    <img alt="netglade" src="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
+  </picture>
+</a>
 
 Developed with 💚 by [netglade][netglade_link]
 
@@ -38,7 +40,7 @@ Check the [`storybook_flutter` demo][storybook_demo_link] and play with it yours
   - toggle mode
   - toggle debug (so you can debug each part visually) 
 
-![](screenshots/storybook.png)
+[![](screenshots/storybook.png)][storybook_demo_link]
 
 ## Getting Started
 

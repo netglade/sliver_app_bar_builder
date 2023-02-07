@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sliver_app_bar_builder/sliver_app_bar_builder.dart';
 import 'package:sliver_app_bar_builder_example/stories/sliver_app_bar_builder_story.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
