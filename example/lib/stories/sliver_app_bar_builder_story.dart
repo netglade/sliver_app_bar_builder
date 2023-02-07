@@ -188,10 +188,10 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    height: 60,
+                    height: contentHeight,
                     transform: Matrix4.translationValues(
                       10 + (1 - expandRatio) * 40,
-                      knobBarHeight / 2 - (knobFontSize * 1.5 + expandRatio * 10) + 5 + expandRatio * 60,
+                      0,
                       0,
                     ),
                     child: Text(

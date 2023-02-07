@@ -15,29 +15,21 @@ Developed with 💚 by [netglade][netglade_link]
 
 ---
 
+![](docs/storybook.png)
+
 A truly customizable sliver for app bars with the benefit of using builders.
-Check the [`flutter_storybook` demo](example/README.md) in examples and play with the configuration.
+Check the [`storybook_flutter` demo](example/README.md) in examples and play with the configuration.
+
+![](docs/storybook.mov)
 
 ## Getting Started
-
-![](docs/storybook.png)
-![](docs/storybook.mov)
 
 ```dart
 CustomScrollView(
   slivers: [
     SliverAppBarBuilder(
       barHeight: 60,
-      backgroundColorAll: knobBackgroundColorAll,
-      initialBarHeight: knobInitialBarHeight,
-      pinned: knobPinned,
-      floating: knobFloating,
-      initialContentHeight: knobInitialContentHeight,
-      collapseLeadingActions: knobCollapseLeadingActions,
-      leadingActionsPadding: EdgeInsets.symmetric(horizontal: knobLeadingActionsPadding),
-      collapseTrailingActions: knobCollapseTrailingActions,
-      trailingActionsPadding: EdgeInsets.symmetric(horizontal: knobTrailingActionsPadding),
-      separateContent: knobSeparateContent,
+      pinned: true,
       contentBuilder: (context, expandRatio, contentHeight, overlapsContent) {
         return Container(
           alignment: Alignment.centerLeft,

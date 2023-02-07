@@ -38,6 +38,8 @@ doc/api/
 
 ### CUSTOM RULES ###
 
+.DS_Store
+
 # IDEs
 .idea/
 **/*.iml
