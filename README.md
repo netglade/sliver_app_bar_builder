@@ -16,11 +16,45 @@ Developed with 💚 by [netglade][netglade_link]
 ---
 
 A truly customizable sliver for app bars with the benefit of using builders.
-Check the [`storybook_flutter` demo](example/README.md) in examples and play with the configuration.
+Check the [`storybook_flutter` demo][storybook_demo_link] and play with it yourself.
+
+`SliverAppBarBuilder` supports various configurations:
+
+- bar
+  - height
+  - initialHeight (when expanded)
+  - background (for everything or bar only)
+- content
+  - builder
+  - initialHeight
+  - toggle separation (whether content is above bar or below it)
+  - padding
+- leading and trailing actions
+  - list of builders
+  - toggle collapsing
+  - padding
+- generic
+  - pinned mode
+  - toggle mode
+  - toggle debug (so you can debug each part visually) 
 
 ![](screenshots/storybook.png)
 
 ## Getting Started
+
+Using the package is simple.
+Just use the sliver `SliverAppBarBuilder` in place of `SliverAppBar`,
+configure all the properties,
+and enjoy.
+
+Each builder, for content or leading/trailing actions,
+provides expand ratio and content/bar height,
+so you can easily use these values to customize your headers.
+
+- `expandRatio` is a value between `1.0` for expanded and `0.0` for shrunk states.
+- `contentHeight`/`barHeight` are current heights of corresponding parts
+
+An example of a header with title moving from under back button to its right might look like this:
 
 ```dart
 CustomScrollView(
@@ -28,24 +62,26 @@ CustomScrollView(
     SliverAppBarBuilder(
       barHeight: 60,
       pinned: true,
+      leadingActions: [
+        (context, expandRatio, barHeight, overlapsContent) {
+          return SizedBox(
+            height: barHeight,
+            child: const BackButton(),
+          );
+        }
+      ],
+      initialContentHeight: 150,
       contentBuilder: (context, expandRatio, contentHeight, overlapsContent) {
         return Container(
           alignment: Alignment.centerLeft,
           height: 60,
-          transform: Matrix4.translationValues(10 + (1 - expandRatio) * 40, expandRatio * 60, 0),
+          transform: Matrix4.translationValues(10 + (1 - expandRatio) * 40, 0, 0),
           child: Text(
-            knobText,
+            'My Title',
             style: TextStyle(
-              fontSize: knobFontSize + expandRatio * 10,
+              fontSize: 22 + expandRatio * 10,
               color: Colors.white,
               fontWeight: FontWeight.bold,
-              shadows: [
-                Shadow(
-                  color: Color.lerp(Colors.black, Colors.transparent, 1 - expandRatio) ?? Colors.transparent,
-                  blurRadius: 10,
-                  offset: const Offset(4, 2),
-                )
-              ],
             ),
           ),
         );
@@ -54,6 +90,8 @@ CustomScrollView(
   ],
 );
 ```
+
+[storybook_demo_link]: https://netglade.github.io/sliver_app_bar_builder
 
 [netglade_link]: https://netglade.cz/en
 
