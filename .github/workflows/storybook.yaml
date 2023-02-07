@@ -25,6 +25,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./app
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -35,15 +39,12 @@ jobs:
       - name: Configure FVM
         uses: kuhnroyal/flutter-fvm-config-action@v1
         with:
-          path: 'example/.fvm/fvm_config.json'
+          path: '.fvm/fvm_config.json'
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
-
-      - name: Move to Example
-        run: cd example/
 
       - name: Build Storybook for Web
         run: flutter build web
@@ -54,7 +55,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: 'build/web/'
+          path: 'example/build/web/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
