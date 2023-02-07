@@ -32,16 +32,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Move to Example
-        run: cd example/
-
       - name: Configure FVM
         uses: kuhnroyal/flutter-fvm-config-action@v1
+        with:
+          path: 'example/.fvm/fvm_config.json'
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
+
+      - name: Move to Example
+        run: cd example/
 
       - name: Build Storybook for Web
         run: fvm flutter build web
