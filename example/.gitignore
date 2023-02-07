@@ -38,6 +38,8 @@ doc/api/
 
 ### CUSTOM RULES ###
 
+.fvm/flutter_sdk
+
 # IDEs
 .idea/
 .vscode/

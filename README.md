@@ -20,8 +20,6 @@ Developed with 💚 by [netglade][netglade_link]
 A truly customizable sliver for app bars with the benefit of using builders.
 Check the [`storybook_flutter` demo](example/README.md) in examples and play with the configuration.
 
-![](docs/storybook.mov)
-
 ## Getting Started
 
 ```dart
@@ -65,5 +63,5 @@ CustomScrollView(
 [license_badge_link]: https://opensource.org/licenses/MIT
 [pub_badge]: https://img.shields.io/pub/v/sliver_app_bar_builder.svg
 [pub_badge_link]: https://pub.dartlang.org/packages/sliver_app_bar_builder
-[style_badge]: https://img.shields.io/badge/style-sliver_app_bar_builder-26D07C.svg
-[style_badge_link]: https://pub.dev/packages/sliver_app_bar_builder
+[style_badge]: https://img.shields.io/badge/style-netglade_analysis-26D07C.svg
+[style_badge_link]: https://pub.dev/packages/netglade_analysis
