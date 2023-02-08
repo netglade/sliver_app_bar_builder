@@ -59,7 +59,8 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
       description: 'Background of the whole app bar.',
       initial: Colors.blue,
       options: [
-        const Option(value: Colors.blue, label: 'blue'),
+        const Option(value: Colors.transparent, label: 'Invisible'),
+        const Option(value: Colors.blue, label: 'Blue'),
         const Option(value: Colors.white, label: 'White'),
         const Option(value: Color(0xFF37C999), label: 'GreenBlue'),
         const Option(value: Color(0xFFE96E63), label: 'Salmon'),
@@ -71,10 +72,10 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
           'Background for only the bar, so if the content is separated, only the bar part will have this color.',
       initial: Colors.transparent,
       options: [
-        const Option(value: Colors.transparent, label: 'default - invisible'),
-        const Option(value: Colors.blue, label: 'blue'),
-        const Option(value: Colors.pink, label: 'pink'),
-        const Option(value: Colors.green, label: 'green'),
+        const Option(value: Colors.transparent, label: 'Invisible'),
+        const Option(value: Colors.blue, label: 'Blue'),
+        const Option(value: Colors.pink, label: 'Pink'),
+        const Option(value: Colors.green, label: 'Green'),
       ],
     );
 
