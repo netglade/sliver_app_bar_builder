@@ -162,7 +162,22 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant SliverAppBarBuilderDelegate oldDelegate) {
-    return true;
+    return viewPadding != oldDelegate.viewPadding ||
+        barHeight != oldDelegate.barHeight ||
+        initialBarHeight != oldDelegate.initialBarHeight ||
+        initialContentHeight != oldDelegate.initialContentHeight ||
+        contentBuilder != oldDelegate.contentBuilder ||
+        contentPadding != oldDelegate.contentPadding ||
+        leadingActions != oldDelegate.leadingActions ||
+        leadingActionsPadding != oldDelegate.leadingActionsPadding ||
+        collapseLeadingActions != oldDelegate.collapseLeadingActions ||
+        trailingActions != oldDelegate.trailingActions ||
+        trailingActionsPadding != oldDelegate.trailingActionsPadding ||
+        collapseTrailingActions != oldDelegate.collapseTrailingActions ||
+        backgroundColorAll != oldDelegate.backgroundColorAll ||
+        backgroundColorBar != oldDelegate.backgroundColorBar ||
+        separateContent != oldDelegate.separateContent ||
+        debug != oldDelegate.debug;
   }
 
   @override
