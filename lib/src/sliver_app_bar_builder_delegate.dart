@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:sliver_app_bar_builder/src/types/shrink_ratio_builder_bar_callback.dart';
-import 'package:sliver_app_bar_builder/src/types/shrink_ratio_builder_content_callback.dart';
+import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_bar_callback.dart';
+import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_content_callback.dart';
 
 /// Custom [SliverPersistentHeaderDelegate] implementation.
 ///
@@ -17,7 +17,7 @@ import 'package:sliver_app_bar_builder/src/types/shrink_ratio_builder_content_ca
 /// By default, [leadingActions] contains [BackButton].
 ///
 /// Below bar there is content.
-/// Content shrinks (or stretches when smaller) its height from [initialContentHeight] to [barHeight].
+/// Content shrinks (or expands when smaller) its height from [initialContentHeight] to [barHeight].
 /// {@endtemplate}
 class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   /// {@template SliverAppBarBuilderDelegate.viewPadding}
@@ -40,11 +40,11 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   final double? initialBarHeight;
 
   /// {@template SliverAppBarBuilderDelegate.contentBuilder}
-  /// Defines [ShrinkRatioBuilderContentCallback] builder to build content widget.
+  /// Defines [ExpandRatioBuilderContentCallback] builder to build content widget.
   ///
   /// [initialContentHeight] must also be defined.
   /// {@endtemplate}
-  final ShrinkRatioBuilderContentCallback? contentBuilder;
+  final ExpandRatioBuilderContentCallback? contentBuilder;
 
   /// {@template SliverAppBarBuilderDelegate.contentHeight}
   /// Height of content when expanded.
@@ -60,9 +60,9 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   final EdgeInsets? contentPadding;
 
   /// {@template SliverAppBarBuilderDelegate.leadingActions}
-  /// List of [ShrinkRatioBuilderBarCallback] to be placed in leading (top right in bar) position.
+  /// List of [ExpandRatioBuilderBarCallback] to be placed in leading (top right in bar) position.
   /// {@endtemplate}
-  final List<ShrinkRatioBuilderBarCallback> leadingActions;
+  final List<ExpandRatioBuilderBarCallback> leadingActions;
 
   /// {@template SliverAppBarBuilderDelegate.shrinkLeadingActions}
   /// Sets whether leading actions should be collapsed above viewport on scroll.
@@ -75,9 +75,9 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   final EdgeInsets? leadingActionsPadding;
 
   /// {@template SliverAppBarBuilderDelegate.trailingActions}
-  /// List of [ShrinkRatioBuilderBarCallback] to be placed in leading (top right in bar) position.
+  /// List of [ExpandRatioBuilderBarCallback] to be placed in leading (top right in bar) position.
   /// {@endtemplate}
-  final List<ShrinkRatioBuilderBarCallback> trailingActions;
+  final List<ExpandRatioBuilderBarCallback> trailingActions;
 
   /// {@template SliverAppBarBuilderDelegate.shrinkTrailingActions}
   /// Sets whether trailing actions should be collapsed above viewport on scroll.

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sliver_app_bar_builder/src/sliver_app_bar_builder_delegate.dart';
-import 'package:sliver_app_bar_builder/src/types/shrink_ratio_builder_bar_callback.dart';
-import 'package:sliver_app_bar_builder/src/types/shrink_ratio_builder_content_callback.dart';
+import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_bar_callback.dart';
+import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_content_callback.dart';
 
 /// {@template SliverAppBarBuilder}
 /// Sliver for an app bar that uses [SliverAppBarBuilderDelegate].
 ///
 /// This sliver is customizable,
-/// exposes [ShrinkRatioBuilderContentCallback] builder to build a content based on shrink ratio and/or content height,
-/// exposes [ShrinkRatioBuilderBarCallback] builder to build leading or trailing actions based on shrink ratio and/or bar height,
+/// exposes [ExpandRatioBuilderContentCallback] builder to build a content based on expand ratio and/or content height,
+/// exposes [ExpandRatioBuilderBarCallback] builder to build leading or trailing actions based on expand ratio and/or bar height,
 /// exposes paddings for content and leading and trailing actions,
 /// provides a way to collapse leading and trailing actions,
 /// and provides a debug mode.
@@ -35,7 +35,7 @@ class SliverAppBarBuilder extends StatelessWidget {
   final double? initialBarHeight;
 
   /// {@macro SliverAppBarBuilderDelegate.contentBuilder}
-  final ShrinkRatioBuilderContentCallback? contentBuilder;
+  final ExpandRatioBuilderContentCallback? contentBuilder;
 
   /// {@macro SliverAppBarBuilderDelegate.contentHeight}
   final double? initialContentHeight;
@@ -46,7 +46,7 @@ class SliverAppBarBuilder extends StatelessWidget {
   /// {@macro SliverAppBarBuilderDelegate.leadingActions}
   ///
   /// Defaults to [BackButton].
-  final List<ShrinkRatioBuilderBarCallback>? leadingActions;
+  final List<ExpandRatioBuilderBarCallback>? leadingActions;
 
   /// {@macro SliverAppBarBuilderDelegate.shrinkLeadingActions}
   ///
@@ -57,7 +57,7 @@ class SliverAppBarBuilder extends StatelessWidget {
   final EdgeInsets? leadingActionsPadding;
 
   /// {@macro SliverAppBarBuilderDelegate.trailingActions}
-  final List<ShrinkRatioBuilderBarCallback> trailingActions;
+  final List<ExpandRatioBuilderBarCallback> trailingActions;
 
   /// {@macro SliverAppBarBuilderDelegate.shrinkTrailingActions}
   ///
@@ -120,7 +120,7 @@ class SliverAppBarBuilder extends StatelessWidget {
         initialContentHeight: initialContentHeight,
         contentBuilder: contentBuilder,
         contentPadding: contentPadding,
-        leadingActions: leadingActions ?? [(context, shrinkRatio, barHeight, overlapsContent) => const BackButton()],
+        leadingActions: leadingActions ?? [(_, __, ___, ____) => const BackButton()],
         leadingActionsPadding: leadingActionsPadding,
         collapseLeadingActions: collapseLeadingActions,
         trailingActions: trailingActions,

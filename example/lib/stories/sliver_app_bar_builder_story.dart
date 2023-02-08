@@ -37,7 +37,7 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
     final knobBarHeight = context.knobs
         .sliderInt(
           label: 'Bar height',
-          description: 'Height of bar when in shrink state.\n',
+          description: 'Height of bar when shrunken.',
           initial: 60,
           min: 40,
           max: 150,
@@ -46,7 +46,7 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
     final knobInitialBarHeight = context.knobs
         .sliderInt(
           label: 'Initial bar height',
-          description: 'Height of bar when in expanded state.',
+          description: 'Height of bar when expanded.',
           initial: 60,
           min: 40,
           max: 150,
@@ -87,7 +87,7 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
     final knobInitialContentHeight = context.knobs
         .sliderInt(
           label: 'Initial content height',
-          description: 'Height of content when in expanded state.',
+          description: 'Height of content when expanded.',
           initial: 300,
           min: 30,
           max: 300,
