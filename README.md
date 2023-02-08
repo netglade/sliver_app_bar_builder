@@ -18,7 +18,7 @@ Developed with 💚 by [netglade][netglade_link]
 ---
 
 A truly customizable sliver for app bars with the benefit of using builders.
-Check the [`storybook_flutter` demo][storybook_demo_link] and play with it yourself.
+Check the [storybook demo][storybook_demo_link] and play with it yourself.
 
 `SliverAppBarBuilder` supports various configurations:
 
