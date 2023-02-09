@@ -56,8 +56,11 @@ Each builder, for content or leading/trailing actions,
 provides expand ratio and content/bar height,
 so you can easily use these values to customize your headers.
 
-- `expandRatio` is a value between `1.0` when expanded and `0.0` when shrunken.
+- `expandRatio` is a value between `1.0` when expanded and `0.0` when shrunken
 - `contentHeight`/`barHeight` are current heights of corresponding parts
+
+Content builder has additional property:
+- `centerPadding`, when `contentBelowBar` is false, is a value used to offset content to center it with bar
 
 An example of a header with title moving from under back button to its right might look like this:
 
