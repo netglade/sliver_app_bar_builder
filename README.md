@@ -29,16 +29,19 @@ Check the [storybook demo][storybook_demo_link] and play with it yourself.
 - content
   - builder
   - initialHeight
-  - toggle separation (whether content is above bar or below it)
+  - toggle contentBelowBar (whether content is on top or below bar)
   - padding
 - leading and trailing actions
   - list of builders
   - toggle collapsing
   - padding
-- generic
+- stretching
+  - toggle stretch
+  - stretchConfiguration
+- misc
   - pinned mode
   - toggle mode
-  - toggle debug (so you can debug each part visually) 
+  - toggle debug (so you can debug each part visually)
 
 [![](screenshots/storybook.png)][storybook_demo_link]
 

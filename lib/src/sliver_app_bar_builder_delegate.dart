@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_bar_callback.dart';
 import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_content_callback.dart';
 
@@ -48,7 +49,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
 
   /// {@template SliverAppBarBuilderDelegate.contentHeight}
   /// Height of content when expanded.
-  /// When [separateContent] is false, if [initialContentHeight] is less than bar height, bar's height is used instead.
+  /// When [contentBelowBar] is false, if [initialContentHeight] is less than bar height, bar's height is used instead.
   ///
   /// [contentBuilder] must also be defined.
   /// {@endtemplate}
@@ -107,10 +108,23 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   /// Defaults to primary color.
   final Color? backgroundColorAll;
 
-  /// {@template SliverAppBarBuilderDelegate.separateContent}
+  /// {@template SliverAppBarBuilderDelegate.contentBelowBar}
   /// Determines if the content is below the bar or in stack with it.
   /// {@endtemplate}
-  final bool separateContent;
+  final bool contentBelowBar;
+
+  /// {@template SliverAppBarBuilderDelegate.stretch}
+  /// Determines if content is expanded on stretch.
+  /// {@endtemplate}
+  final bool stretch;
+
+  /// {@template SliverAppBarBuilderDelegate.stretchConfiguration}
+  /// Setups `OverScrollHeaderStretchConfiguration` that is applied when [stretch] is enabled.
+  /// {@endtemplate}
+  final OverScrollHeaderStretchConfiguration? _stretchConfiguration;
+
+  @override
+  OverScrollHeaderStretchConfiguration? get stretchConfiguration => stretch ? _stretchConfiguration : null;
 
   @override
   double get maxExtent {
@@ -127,7 +141,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
     final initialBarHeightTmp = initialBarHeight ?? 0;
     final barHeightTmp = initialBarHeightTmp > barHeight ? initialBarHeightTmp : barHeight;
 
-    if (separateContent) {
+    if (contentBelowBar) {
       return barHeightTmp + initialContentHeightTmp;
     }
 
@@ -156,9 +170,11 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
     this.collapseTrailingActions = false,
     this.backgroundColorAll,
     this.backgroundColorBar,
-    this.separateContent = true,
+    this.contentBelowBar = true,
     this.debug = false,
-  });
+    this.stretch = false,
+    OverScrollHeaderStretchConfiguration? stretchConfiguration,
+  }) : _stretchConfiguration = stretchConfiguration;
 
   @override
   bool shouldRebuild(covariant SliverAppBarBuilderDelegate oldDelegate) {
@@ -176,7 +192,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
         collapseTrailingActions != oldDelegate.collapseTrailingActions ||
         backgroundColorAll != oldDelegate.backgroundColorAll ||
         backgroundColorBar != oldDelegate.backgroundColorBar ||
-        separateContent != oldDelegate.separateContent ||
+        contentBelowBar != oldDelegate.contentBelowBar ||
         debug != oldDelegate.debug;
   }
 
@@ -196,128 +212,128 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
     );
     final barHeightTransformed = barHeightTween.transform(expandRatio);
 
-    final contentHeightTween = Tween(
-      begin: separateContent ? (initialContentHeight ?? 0) : _maxExtentWithoutSafeArea,
-      end: barHeight,
+    final contentTopOffset = Tween(
+      begin: contentBelowBar ? viewPadding.top + barHeightTmp : 0,
+      end: contentBelowBar ? viewPadding.top : 0,
     );
-    final contentHeightTransformed = contentHeightTween.transform(expandRatio);
+    final contentTopOffsetTransformed = contentTopOffset.transform(expandRatio);
 
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        // Colors all in debug or with backgroundColorAll color by default.
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            color: debug ? Colors.yellow.withOpacity(0.5) : backgroundColorAll,
-            height: maxExtent,
-          ),
-        ),
-        // Colors bar in debug or with backgroundColorBar color by default.
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            color: debug ? Colors.red.withOpacity(0.5) : backgroundColorBar,
-            height: viewPadding.top + barHeightTransformed,
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: viewPadding.top),
+    return LayoutBuilder(
+      builder: (context, _) {
+        final allHeight = _.maxHeight - contentTopOffsetTransformed;
+
+        return Container(
+          constraints: const BoxConstraints.expand(),
+          color: debug ? Colors.yellow.withOpacity(0.5) : backgroundColorAll,
           child: Stack(
             fit: StackFit.expand,
             children: [
-              // Color initial bar in debug.
-              if (debug)
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    color: Colors.red.withOpacity(0.5),
-                    height: barHeightTmp,
-                  ),
+              // Colors bar in debug or with backgroundColorBar color by default.
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  color: debug ? Colors.red.withOpacity(0.5) : backgroundColorBar,
+                  height: viewPadding.top + barHeightTransformed,
                 ),
+              ),
 
               // Content.
               if (contentBuilderTmp != null)
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
+                Positioned.fill(
+                  top: contentTopOffsetTransformed.toDouble(),
                   child: Container(
+                    constraints: const BoxConstraints.expand(),
                     color: debug ? Colors.deepPurple.withOpacity(0.5) : null,
-                    height: contentHeightTransformed,
                     padding: contentPadding,
                     // Wrap prevents overflow.
                     child: Wrap(
+                      alignment: WrapAlignment.center,
                       clipBehavior: Clip.hardEdge,
                       children: [
                         contentBuilderTmp(
                           context,
                           1 - expandRatio,
-                          contentHeightTransformed,
+                          allHeight,
+                          EdgeInsets.only(top: !contentBelowBar ? viewPadding.top : 0),
                           overlapsContent,
                         ),
                       ],
                     ),
                   ),
                 ),
-
-              // Trailing Actions.
-              Positioned(
-                top: collapseTrailingActions ? (-expandRatio * barHeightTmp) : 0,
-                right: 0,
-                child: Container(
-                  color: debug ? Colors.green.withOpacity(0.5) : null,
-                  height: collapseTrailingActions ? barHeightTmp : barHeightTransformed,
-                  padding: trailingActionsPadding,
-                  // Wrap prevents overflow.
-                  child: Wrap(
-                    clipBehavior: Clip.hardEdge,
-                    children: [
-                      for (final action in trailingActions)
-                        action(
-                          context,
-                          expandRatio,
-                          barHeightTransformed - (trailingActionsPadding?.vertical ?? 0),
-                          overlapsContent,
+              Container(
+                padding: EdgeInsets.only(top: viewPadding.top),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    // Color initial bar in debug.
+                    if (debug)
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          color: Colors.red.withOpacity(0.5),
+                          height: barHeightTmp,
                         ),
-                    ],
-                  ),
-                ),
-              ),
+                      ),
 
-              // Leading Actions.
-              Positioned(
-                top: collapseLeadingActions ? (-expandRatio * barHeightTmp) : 0,
-                left: 0,
-                child: Container(
-                  color: debug ? Colors.orange.withOpacity(0.5) : null,
-                  height: collapseLeadingActions ? barHeightTmp : barHeightTransformed,
-                  padding: leadingActionsPadding,
-                  // Wrap prevents overflow.
-                  child: Wrap(
-                    clipBehavior: Clip.hardEdge,
-                    children: [
-                      for (final action in leadingActions)
-                        action(
-                          context,
-                          expandRatio,
-                          barHeightTransformed - (leadingActionsPadding?.vertical ?? 0),
-                          overlapsContent,
+                    // Trailing Actions.
+                    Positioned(
+                      top: collapseTrailingActions ? (-expandRatio * barHeightTmp) : 0,
+                      right: 0,
+                      child: Container(
+                        color: debug ? Colors.green.withOpacity(0.5) : null,
+                        height: collapseTrailingActions ? barHeightTmp : barHeightTransformed,
+                        padding: trailingActionsPadding,
+                        // Wrap prevents overflow.
+                        child: Wrap(
+                          clipBehavior: Clip.hardEdge,
+                          children: [
+                            for (final action in trailingActions)
+                              action(
+                                context,
+                                expandRatio,
+                                barHeightTransformed - (trailingActionsPadding?.vertical ?? 0),
+                                overlapsContent,
+                              ),
+                          ],
                         ),
-                    ],
-                  ),
+                      ),
+                    ),
+
+                    // Leading Actions.
+                    Positioned(
+                      top: collapseLeadingActions ? (-expandRatio * barHeightTmp) : 0,
+                      left: 0,
+                      child: Container(
+                        color: debug ? Colors.orange.withOpacity(0.5) : null,
+                        height: collapseLeadingActions ? barHeightTmp : barHeightTransformed,
+                        padding: leadingActionsPadding,
+                        // Wrap prevents overflow.
+                        child: Wrap(
+                          clipBehavior: Clip.hardEdge,
+                          children: [
+                            for (final action in leadingActions)
+                              action(
+                                context,
+                                expandRatio,
+                                barHeightTransformed - (leadingActionsPadding?.vertical ?? 0),
+                                overlapsContent,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

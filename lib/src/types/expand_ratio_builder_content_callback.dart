@@ -5,5 +5,6 @@ typedef ExpandRatioBuilderContentCallback = Widget Function(
   BuildContext context,
   double expandRatio,
   double contentHeight,
+  EdgeInsets centerPadding,
   bool overlapsContent,
 );

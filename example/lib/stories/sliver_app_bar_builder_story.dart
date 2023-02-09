@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_redundant_argument_values, no-empty-block
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sliver_app_bar_builder/sliver_app_bar_builder.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
@@ -29,6 +30,13 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
       colors: [Colors.black, Colors.transparent],
       stops: [0.6, 1],
     ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+  }
+
+  Future<void> _onStretchCallback() {
+    // ignore: avoid_print, for demo purposes
+    print('ping on stretch');
+
+    return Future.value();
   }
 
   @override
@@ -80,7 +88,7 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
     );
 
     // Content.
-    final knobSeparateContent = context.knobs.boolean(
+    final knobContentBelowBar = context.knobs.boolean(
       label: 'Separate content',
       description: 'Determines if the content is below the bar or above it.',
       initial: false,
@@ -173,23 +181,37 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
             leadingActionsPadding: EdgeInsets.symmetric(horizontal: knobLeadingActionsPadding),
             collapseTrailingActions: knobCollapseTrailingActions,
             trailingActionsPadding: EdgeInsets.symmetric(horizontal: knobTrailingActionsPadding),
-            separateContent: knobSeparateContent,
-            contentBuilder: (context, expandRatio, contentHeight, overlapsContent) {
+            contentBelowBar: knobContentBelowBar,
+            stretch: true,
+            stretchConfiguration: OverScrollHeaderStretchConfiguration(
+              stretchTriggerOffset: 100,
+              onStretchTrigger: _onStretchCallback,
+            ),
+            contentBuilder: (context, expandRatio, contentHeight, centerPadding, overlapsContent) {
               return Stack(
                 children: [
+                  // All height image that fades away on scroll.
                   Opacity(
                     opacity: expandRatio,
                     child: ShaderMask(
                       shaderCallback: _shaderCallback,
                       blendMode: BlendMode.dstIn,
-                      child: const Image(
-                        image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+                      child: Image(
+                        height: contentHeight,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        alignment: Alignment.topCenter,
+                        image:
+                            const NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
                       ),
                     ),
                   ),
+
+                  // Using alignment and padding, centers text to center of bar.
                   Container(
                     alignment: Alignment.centerLeft,
                     height: contentHeight,
+                    padding: centerPadding,
                     transform: Matrix4.translationValues(
                       10 + (1 - expandRatio) * 40,
                       0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sliver_app_bar_builder/src/sliver_app_bar_builder_delegate.dart';
 import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_bar_callback.dart';
 import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_content_callback.dart';
@@ -7,7 +8,8 @@ import 'package:sliver_app_bar_builder/src/types/expand_ratio_builder_content_ca
 /// Sliver for an app bar that uses [SliverAppBarBuilderDelegate].
 ///
 /// This sliver is customizable,
-/// exposes [ExpandRatioBuilderContentCallback] builder to build a content based on expand ratio and/or content height,
+/// exposes [ExpandRatioBuilderContentCallback] builder to build a content based on expand ratio and/or content height
+///   with center padding that provides padding one can use to center content to bar,
 /// exposes [ExpandRatioBuilderBarCallback] builder to build leading or trailing actions based on expand ratio and/or bar height,
 /// exposes paddings for content and leading and trailing actions,
 /// provides a way to collapse leading and trailing actions,
@@ -76,10 +78,16 @@ class SliverAppBarBuilder extends StatelessWidget {
   /// {@macro SliverAppBarBuilderDelegate.allBackgroundColor}
   final Color? backgroundColorAll;
 
-  /// {@macro SliverAppBarBuilderDelegate.separateContent}
+  /// {@macro SliverAppBarBuilderDelegate.contentBelowBar}
   ///
   /// Defaults to true.
-  final bool separateContent;
+  final bool contentBelowBar;
+
+  /// {@macro SliverAppBarBuilderDelegate.stretch}
+  final bool stretch;
+
+  /// {@macro SliverAppBarBuilderDelegate.stretchConfiguration}
+  final OverScrollHeaderStretchConfiguration? stretchConfiguration;
 
   /// {@macro SliverAppBarBuilder}
   ///
@@ -101,7 +109,9 @@ class SliverAppBarBuilder extends StatelessWidget {
     this.debug = false,
     this.backgroundColorBar,
     this.backgroundColorAll,
-    this.separateContent = true,
+    this.contentBelowBar = true,
+    this.stretch = false,
+    this.stretchConfiguration,
     super.key,
   }) : assert(
           !((initialContentHeight != null) ^ (contentBuilder != null)),
@@ -126,10 +136,12 @@ class SliverAppBarBuilder extends StatelessWidget {
         trailingActions: trailingActions,
         trailingActionsPadding: trailingActionsPadding,
         collapseTrailingActions: collapseTrailingActions,
-        separateContent: separateContent,
+        contentBelowBar: contentBelowBar,
         backgroundColorAll: backgroundColorAll ?? Theme.of(context).primaryColor,
         backgroundColorBar: backgroundColorBar,
         debug: debug,
+        stretch: stretch,
+        stretchConfiguration: stretchConfiguration,
       ),
     );
   }
