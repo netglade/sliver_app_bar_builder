@@ -1,0 +1,25 @@
+name: sliver_app_bar_builder_example
+description: SliverAppBarBuilder storybook demo.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sliver_app_bar_builder:
+    path: ../
+  storybook_flutter: ^0.12.0
+
+dev_dependencies:
+  dart_code_metrics: ^5.5.1
+  flutter_test:
+    sdk: flutter
+  netglade_analysis: 1.1.2
+
+flutter:
+  uses-material-design: true
