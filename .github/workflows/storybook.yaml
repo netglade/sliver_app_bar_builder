@@ -23,6 +23,7 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
+    name: Storybook Publish
     runs-on: ubuntu-latest
 
     defaults:
