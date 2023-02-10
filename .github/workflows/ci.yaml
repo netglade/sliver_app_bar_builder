@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-    name: Analyze and Test
     runs-on: ubuntu-latest
 
     steps:
