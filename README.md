@@ -5,7 +5,7 @@
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_light.png">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
     <img alt="netglade" src="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
-   </picture>
+  </picture>
 </a>
 
 Developed with 💚 by [netglade][netglade_link]
@@ -23,25 +23,25 @@ Check the [storybook demo][storybook_demo_link] and play with it yourself.
 `SliverAppBarBuilder` supports various configurations:
 
 - bar
-    - height
-    - initialHeight (when expanded)
-    - background (for everything or bar only)
+  - height
+  - initialHeight (when expanded)
+  - background (for everything or bar only)
 - content
-    - builder
-    - initialHeight
-    - toggle contentBelowBar (whether content is on top or below bar)
-    - padding
+  - builder
+  - initialHeight
+  - toggle contentBelowBar (whether content is on top or below bar)
+  - padding
 - leading and trailing actions
-    - list of builders
-    - toggle collapsing
-    - padding
+  - list of builders
+  - toggle collapsing
+  - padding
 - stretching
-    - toggle stretch
-    - stretchConfiguration
+  - toggle stretch
+  - stretchConfiguration
 - misc
-    - pinned mode
-    - toggle mode
-    - toggle debug (so you can debug each part visually)
+  - pinned mode
+  - toggle mode
+  - toggle debug (so you can debug each part visually)
 
 [![][storybook_image_link]][storybook_demo_link]
 
@@ -60,75 +60,55 @@ so you can easily use these values to customize your headers.
 - `contentHeight`/`barHeight` are current heights of corresponding parts
 
 Content builder has additional property:
-
-- `centerPadding`, when `contentBelowBar` is false, is a value used to offset content to center it
-  with bar
+- `centerPadding`, when `contentBelowBar` is false, is a value used to offset content to center it with bar
 
 An example of a header with title moving from under back button to its right might look like this:
 
 ```dart
-CustomScrollView
-(
-slivers: [
-SliverAppBarBuilder
-(
-barHeight: 60
-,
-pinned: true
-,
-leadingActions: [
-(
-context, expandRatio, barHeight, overlapsContent) {
-return SizedBox(
-height: barHeight,
-child: const BackButton(),
-);
-}
-]
-,
-initialContentHeight: 150
-,
-contentBuilder: (
-context, expandRatio, contentHeight, overlapsContent) {
-return Container(
-alignment: Alignment.centerLeft,
-height: 60,
-transform: Matrix4.translationValues(10 + (1 - expandRatio) * 40, 0, 0),
-child: Text(
-'My Title',
-style: TextStyle(
-fontSize: 22 + expandRatio * 10,
-color: Colors.white,
-fontWeight: FontWeight.bold,
-),
-),
-);
-},
-)
-,
-]
-,
+CustomScrollView(
+  slivers: [
+    SliverAppBarBuilder(
+      barHeight: 60,
+      pinned: true,
+      leadingActions: [
+        (context, expandRatio, barHeight, overlapsContent) {
+          return SizedBox(
+            height: barHeight,
+            child: const BackButton(),
+          );
+        }
+      ],
+      initialContentHeight: 150,
+      contentBuilder: (context, expandRatio, contentHeight, overlapsContent) {
+        return Container(
+          alignment: Alignment.centerLeft,
+          height: 60,
+          transform: Matrix4.translationValues(10 + (1 - expandRatio) * 40, 0, 0),
+          child: Text(
+            'My Title',
+            style: TextStyle(
+              fontSize: 22 + expandRatio * 10,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
+      },
+    ),
+  ],
 );
 ```
 
 [storybook_image_link]: https://github.com/netglade/sliver_app_bar_builder/raw/main/screenshots/storybook.png
-
 [storybook_demo_link]: https://netglade.github.io/sliver_app_bar_builder
 
 [netglade_link]: https://netglade.cz/en
 
 [ci_badge]: https://github.com/netglade/sliver_app_bar_builder/workflows/ci/badge.svg
-
 [ci_badge_link]: https://github.com/netglade/sliver_app_bar_builder/actions
-
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-
 [license_badge_link]: https://opensource.org/licenses/MIT
-
 [pub_badge]: https://img.shields.io/pub/v/sliver_app_bar_builder.svg
-
 [pub_badge_link]: https://pub.dartlang.org/packages/sliver_app_bar_builder
-
 [style_badge]: https://img.shields.io/badge/style-netglade_analysis-26D07C.svg
-
 [style_badge_link]: https://pub.dev/packages/netglade_analysis
