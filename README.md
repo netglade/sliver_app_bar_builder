@@ -43,7 +43,7 @@ Check the [storybook demo][storybook_demo_link] and play with it yourself.
   - toggle mode
   - toggle debug (so you can debug each part visually)
 
-[![](screenshots/storybook.png)][storybook_demo_link]
+[![][storybook_image_link]][storybook_demo_link]
 
 ## Getting Started
 
@@ -99,6 +99,7 @@ CustomScrollView(
 );
 ```
 
+[storybook_image_link]: https://github.com/netglade/sliver_app_bar_builder/raw/main/screenshots/storybook.png
 [storybook_demo_link]: https://netglade.github.io/sliver_app_bar_builder
 
 [netglade_link]: https://netglade.cz/en
