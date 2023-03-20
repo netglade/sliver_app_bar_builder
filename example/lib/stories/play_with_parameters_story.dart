@@ -5,16 +5,16 @@ import 'package:flutter/rendering.dart';
 import 'package:sliver_app_bar_builder/sliver_app_bar_builder.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class SliverAppBarBuilderStory extends StatefulWidget {
-  const SliverAppBarBuilderStory({
+class PlayWithParametersStory extends StatefulWidget {
+  const PlayWithParametersStory({
     super.key,
   });
 
   @override
-  State<SliverAppBarBuilderStory> createState() => _SliverAppBarBuilderStoryState();
+  State<PlayWithParametersStory> createState() => _PlayWithParametersStoryState();
 }
 
-class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
+class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -211,12 +211,7 @@ class _SliverAppBarBuilderStoryState extends State<SliverAppBarBuilderStory> {
                   Container(
                     alignment: Alignment.centerLeft,
                     height: contentHeight,
-                    padding: centerPadding,
-                    transform: Matrix4.translationValues(
-                      10 + (1 - expandRatio) * 40,
-                      0,
-                      0,
-                    ),
+                    padding: centerPadding.copyWith(left: 10 + (1 - expandRatio) * 40),
                     child: Text(
                       knobText,
                       style: TextStyle(

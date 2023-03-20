@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sliver_app_bar_builder_example/stories/sliver_app_bar_builder_story.dart';
+import 'package:sliver_app_bar_builder_example/stories/multiline_to_oneline_story.dart';
+import 'package:sliver_app_bar_builder_example/stories/play_with_parameters_story.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 void main() {
@@ -10,6 +11,7 @@ void main() {
 class StorybookApp extends StatelessWidget {
   final _plugins = initializePlugins(
     knobsSidePanel: true,
+    contentsSidePanel: true,
     initialDeviceFrameData: DeviceFrameData(
       device: Devices.ios.iPhone13ProMax,
     ),
@@ -29,12 +31,15 @@ class StorybookApp extends StatelessWidget {
         useInheritedMediaQuery: true,
         home: Scaffold(body: Center(child: child)),
       ),
-      initialStory: 'SliverAppBarBuilder',
+      initialStory: 'Default',
       stories: [
         Story(
-          name: 'SliverAppBarBuilder',
-          description: 'SliverAppBarBuilder demo',
-          builder: (context) => const SliverAppBarBuilderStory(),
+          name: 'Default',
+          builder: (context) => const PlayWithParametersStory(),
+        ),
+        Story(
+          name: 'Multiline to one line',
+          builder: (context) => const MultilineToOneLineStory(),
         ),
       ],
     );
