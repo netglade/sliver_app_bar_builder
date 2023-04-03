@@ -1,6 +1,6 @@
 # sliver_app_bar_builder
 
-<a href="https://netglade.cz/en">
+<a href="https://netglade.com/en">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_light.png">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
@@ -14,6 +14,7 @@ Developed with 💚 by [netglade][netglade_link]
 [![pub package][pub_badge]][pub_badge_link]
 [![license: MIT][license_badge]][license_badge_link]
 [![style: netglade analysis][style_badge]][style_badge_link]
+[![Discord][discord_badge]][discord_badge_link]
 
 ---
 
@@ -102,7 +103,7 @@ CustomScrollView(
 [storybook_image_link]: https://github.com/netglade/sliver_app_bar_builder/raw/main/screenshots/storybook.png
 [storybook_demo_link]: https://netglade.github.io/sliver_app_bar_builder
 
-[netglade_link]: https://netglade.cz/en
+[netglade_link]: https://netglade.com/en
 
 [ci_badge]: https://github.com/netglade/sliver_app_bar_builder/workflows/ci/badge.svg
 [ci_badge_link]: https://github.com/netglade/sliver_app_bar_builder/actions
@@ -112,3 +113,5 @@ CustomScrollView(
 [pub_badge_link]: https://pub.dartlang.org/packages/sliver_app_bar_builder
 [style_badge]: https://img.shields.io/badge/style-netglade_analysis-26D07C.svg
 [style_badge_link]: https://pub.dev/packages/netglade_analysis
+[discord_badge]: https://img.shields.io/discord/1091460081054400532.svg?logo=discord&color=blue
+[discord_badge_link]: https://discord.gg/sJfBBuDZy4
