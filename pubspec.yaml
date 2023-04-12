@@ -1,8 +1,11 @@
 name: sliver_app_bar_builder
 description: A truly customizable sliver for app bars with the benefit of using builders.
-version: 1.0.3
+version: 1.0.4
 repository: https://github.com/netglade/sliver_app_bar_builder
 issue_tracker: https://github.com/netglade/sliver_app_bar_builder/issues
+screenshots:
+  - description: The sliver_app_bar_builder package logo.
+    path: doc/icon.png
 
 environment:
   sdk: '>=2.18.5 <3.0.0'
