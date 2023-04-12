@@ -1,3 +1,6 @@
+## 1.0.4
+- Update logo.
+
 ## 1.0.3
 - Fix README images.
 

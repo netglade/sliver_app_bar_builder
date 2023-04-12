@@ -1,10 +1,8 @@
-# sliver_app_bar_builder
-
-<a href="https://netglade.com/en">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_light.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
-    <img alt="netglade" src="https://raw.githubusercontent.com/netglade/.github/main/assets/netglade_logo_dark.png">
+<a href="https://github.com/netglade">
+  <picture >
+    <source media="(prefers-color-scheme: dark)" height='120px' srcset="https://raw.githubusercontent.com/netglade/sliver_app_bar_builder/main/doc/badge_light.png">
+    <source media="(prefers-color-scheme: light)" height='120px' srcset="https://raw.githubusercontent.com/netglade/sliver_app_bar_builder/main/doc/badge_dark.png">
+    <img alt="netglade" height='120px' src="https://raw.githubusercontent.com/netglade/sliver_app_bar_builder/main/doc/badge_dark.png">
   </picture>
 </a>
 
