@@ -1,3 +1,6 @@
+## 1.0.5
+- Adhere to netglade_analysis 2.0.0.
+
 ## 1.0.4
 - Update logo.
 

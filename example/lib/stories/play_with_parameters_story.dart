@@ -171,7 +171,6 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
             barHeight: knobBarHeight,
             debug: knobDebug,
             backgroundColorBar: knobBackgroundColorBar,
-            // ignore: no-equal-arguments, wanted for this example
             backgroundColorAll: knobBackgroundColorAll,
             initialBarHeight: knobInitialBarHeight,
             pinned: knobPinned,
