@@ -16,7 +16,6 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  dart_code_metrics: ^5.5.1
   flutter_test:
     sdk: flutter
   netglade_analysis: ^2.0.0-rc.1

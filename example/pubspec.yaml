@@ -16,7 +16,6 @@ dependencies:
   storybook_flutter: ^0.12.0
 
 dev_dependencies:
-  dart_code_metrics: ^5.5.1
   flutter_test:
     sdk: flutter
   netglade_analysis: 1.1.2
