@@ -6,5 +6,6 @@ typedef ExpandRatioBuilderContentCallback = Widget Function(
   double expandRatio,
   double contentHeight,
   EdgeInsets centerPadding,
+  // ignore: avoid_positional_boolean_parameters, used in typedef
   bool overlapsContent,
 );

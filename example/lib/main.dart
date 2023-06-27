@@ -28,7 +28,6 @@ class StorybookApp extends StatelessWidget {
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        useInheritedMediaQuery: true,
         home: Scaffold(body: Center(child: child)),
       ),
       initialStory: 'Default',

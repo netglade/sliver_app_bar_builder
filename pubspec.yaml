@@ -1,6 +1,6 @@
 name: sliver_app_bar_builder
 description: A truly customizable sliver for app bars with the benefit of using builders.
-version: 1.0.4
+version: 1.0.5
 repository: https://github.com/netglade/sliver_app_bar_builder
 issue_tracker: https://github.com/netglade/sliver_app_bar_builder/issues
 screenshots:
@@ -16,7 +16,6 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  dart_code_metrics: ^5.5.1
   flutter_test:
     sdk: flutter
-  netglade_analysis: 1.1.2
+  netglade_analysis: ^2.0.0

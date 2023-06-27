@@ -139,17 +139,9 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   double get _maxExtentWithoutSafeArea {
     final initialContentHeightTmp = initialContentHeight ?? 0;
     final initialBarHeightTmp = initialBarHeight ?? 0;
-    final barHeightTmp = initialBarHeightTmp > barHeight ? initialBarHeightTmp : barHeight;
+    final barHeightTmp = max(initialBarHeightTmp, barHeight);
 
-    if (contentBelowBar) {
-      return barHeightTmp + initialContentHeightTmp;
-    }
-
-    if (initialContentHeightTmp < barHeightTmp) {
-      return barHeightTmp;
-    }
-
-    return initialContentHeightTmp;
+    return contentBelowBar ? barHeightTmp + initialContentHeightTmp : max(initialContentHeightTmp, barHeightTmp);
   }
 
   double get _minExtentWithoutSafeArea => barHeight;
@@ -206,10 +198,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
     final barHeightTmp = initialBarHeight ?? barHeight;
     final contentBuilderTmp = contentBuilder;
 
-    final barHeightTween = Tween(
-      begin: barHeightTmp,
-      end: barHeight,
-    );
+    final barHeightTween = Tween(begin: barHeightTmp, end: barHeight);
     final barHeightTransformed = barHeightTween.transform(expandRatio);
 
     final contentTopOffset = Tween(
