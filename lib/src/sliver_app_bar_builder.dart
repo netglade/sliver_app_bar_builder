@@ -124,7 +124,7 @@ class SliverAppBarBuilder extends StatelessWidget {
       pinned: pinned,
       floating: floating,
       delegate: SliverAppBarBuilderDelegate(
-        viewPadding: MediaQuery.of(context).viewPadding,
+        viewPadding: MediaQuery.viewPaddingOf(context),
         barHeight: barHeight,
         initialBarHeight: initialBarHeight,
         initialContentHeight: initialContentHeight,

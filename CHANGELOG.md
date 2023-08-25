@@ -1,3 +1,8 @@
+## 1.1.0
+- Adhere to netglade_analysis 4.0.0
+- Update Dart SDK constraints
+
+
 ## 1.0.5
 - Adhere to netglade_analysis 2.0.0.
 
