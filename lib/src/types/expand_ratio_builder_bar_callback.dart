@@ -5,6 +5,6 @@ typedef ExpandRatioBuilderBarCallback = Widget Function(
   BuildContext context,
   double expandRatio,
   double barHeight,
-  // ignore: avoid_positional_boolean_parameters, used in typedef
+  // ignore: avoid_positional_boolean_parameters, prefer-named-boolean-parameters, used in typedef
   bool overlapsContent,
 );

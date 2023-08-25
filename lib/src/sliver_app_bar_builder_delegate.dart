@@ -208,8 +208,8 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
     final contentTopOffsetTransformed = contentTopOffset.transform(expandRatio);
 
     return LayoutBuilder(
-      builder: (context, _) {
-        final allHeight = _.maxHeight - contentTopOffsetTransformed;
+      builder: (context, constraints) {
+        final allHeight = constraints.maxHeight - contentTopOffsetTransformed;
 
         return Container(
           constraints: const BoxConstraints.expand(),

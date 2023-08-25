@@ -222,7 +222,7 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
                             color: Color.lerp(Colors.black, Colors.transparent, 1 - expandRatio) ?? Colors.transparent,
                             blurRadius: 10,
                             offset: const Offset(4, 2),
-                          )
+                          ),
                         ],
                       ),
                     ),
