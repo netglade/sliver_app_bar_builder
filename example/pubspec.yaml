@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   sliver_app_bar_builder:
     path: ../
-  storybook_flutter: ^0.12.0
+  storybook_flutter: ^0.14.0
 
 dev_dependencies:
   flutter_test:
