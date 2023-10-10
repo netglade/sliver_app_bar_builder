@@ -1,19 +1,12 @@
-// ignore_for_file: no-equal-arguments, no-empty-block
+// ignore_for_file: no-empty-block, avoid-local-functions
 
 import 'package:flutter/material.dart';
 import 'package:sliver_app_bar_builder/sliver_app_bar_builder.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
-class MultilineToOneLineStory extends StatefulWidget {
-  const MultilineToOneLineStory({
-    super.key,
-  });
+class MultilineToOneLineStory extends StatelessWidget {
+  const MultilineToOneLineStory({super.key});
 
-  @override
-  State<MultilineToOneLineStory> createState() => _MultilineToOneLineStoryState();
-}
-
-class _MultilineToOneLineStoryState extends State<MultilineToOneLineStory> {
   @override
   Widget build(BuildContext context) {
     // Bar.
@@ -73,7 +66,7 @@ class _MultilineToOneLineStoryState extends State<MultilineToOneLineStory> {
     }
 
     TextPainter painterForExpandRatio(double expandRatio) {
-      final screenWidth = MediaQuery.of(context).size.width;
+      final screenWidth = MediaQuery.sizeOf(context).width;
       final paddingSpace = EdgeInsets.only(left: leftPaddingForExpandRatio(expandRatio));
 
       return TextPainter()

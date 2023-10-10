@@ -9,6 +9,7 @@ void main() {
 
 // ignore: prefer-match-file-name, ok for example
 class StorybookApp extends StatelessWidget {
+  // ignore: avoid-stateless-widget-initialized-fields, ok for this
   final _plugins = initializePlugins(
     knobsSidePanel: true,
     contentsSidePanel: true,

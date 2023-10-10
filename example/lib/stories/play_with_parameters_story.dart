@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_redundant_argument_values, no-empty-block
+// ignore_for_file: avoid_redundant_argument_values, no-empty-block, avoid-missing-image-alt, prefer-define-hero-tag
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -6,9 +6,7 @@ import 'package:sliver_app_bar_builder/sliver_app_bar_builder.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
 
 class PlayWithParametersStory extends StatefulWidget {
-  const PlayWithParametersStory({
-    super.key,
-  });
+  const PlayWithParametersStory({super.key});
 
   @override
   State<PlayWithParametersStory> createState() => _PlayWithParametersStoryState();
@@ -91,7 +89,6 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
     final knobContentBelowBar = context.knobs.boolean(
       label: 'Separate content',
       description: 'Determines if the content is below the bar or above it.',
-      initial: false,
     );
     final knobInitialContentHeight = context.knobs
         .sliderInt(
@@ -104,20 +101,13 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
         .toDouble();
 
     // Sliver settings.
-    final knobPinned = context.knobs.boolean(
-      label: 'Pinned',
-      initial: true,
-    );
-    final knobFloating = context.knobs.boolean(
-      label: 'Floating',
-      initial: false,
-    );
+    final knobPinned = context.knobs.boolean(label: 'Pinned', initial: true);
+    final knobFloating = context.knobs.boolean(label: 'Floating');
 
     // Leading actions.
     final knobCollapseLeadingActions = context.knobs.boolean(
       label: 'Collapse leading actions',
       description: 'Collapses leading actions when scrolling.',
-      initial: false,
     );
     final knobLeadingActionsPadding = context.knobs
         .sliderInt(
@@ -131,7 +121,6 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
     final knobCollapseTrailingActions = context.knobs.boolean(
       label: 'Collapse trailing actions',
       description: 'Collapses trailing actions when scrolling.',
-      initial: false,
     );
     final knobTrailingActionsPadding = context.knobs
         .sliderInt(
@@ -145,7 +134,6 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
     final knobDebug = context.knobs.boolean(
       label: 'Debug',
       description: 'Shows background color for each section - bar, content, leading and trailing actions, whole, ...',
-      initial: false,
     );
 
     // Content customization.
@@ -186,7 +174,13 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
               stretchTriggerOffset: 100,
               onStretchTrigger: _onStretchCallback,
             ),
-            contentBuilder: (context, expandRatio, contentHeight, centerPadding, overlapsContent) {
+            contentBuilder: (
+              context,
+              expandRatio,
+              contentHeight,
+              centerPadding,
+              overlapsContent,
+            ) {
               return Stack(
                 children: [
                   // All height image that fades away on scroll.
@@ -200,8 +194,9 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
                         width: double.infinity,
                         fit: BoxFit.cover,
                         alignment: Alignment.topCenter,
-                        image:
-                            const NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+                        image: const NetworkImage(
+                          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                        ),
                       ),
                     ),
                   ),
@@ -210,7 +205,9 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
                   Container(
                     alignment: Alignment.centerLeft,
                     height: contentHeight,
-                    padding: centerPadding.copyWith(left: 10 + (1 - expandRatio) * 40),
+                    padding: centerPadding.copyWith(
+                      left: 10 + (1 - expandRatio) * 40,
+                    ),
                     child: Text(
                       knobText,
                       style: TextStyle(
@@ -219,7 +216,12 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
                         fontWeight: FontWeight.bold,
                         shadows: [
                           Shadow(
-                            color: Color.lerp(Colors.black, Colors.transparent, 1 - expandRatio) ?? Colors.transparent,
+                            color: Color.lerp(
+                                  Colors.black,
+                                  Colors.transparent,
+                                  1 - expandRatio,
+                                ) ??
+                                Colors.transparent,
                             blurRadius: 10,
                             offset: const Offset(4, 2),
                           ),
@@ -256,7 +258,14 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
                   child: Opacity(
                     opacity: Tween<double>(begin: 1, end: 0).transform((expandRatio * 2).clamp(0.0, 1.0)),
                     child: IconButton(
-                      icon: Icon(Icons.lightbulb, color: Color.lerp(Colors.yellow, Colors.red, expandRatio)),
+                      icon: Icon(
+                        Icons.lightbulb,
+                        color: Color.lerp(
+                          Colors.yellow,
+                          Colors.red,
+                          expandRatio,
+                        ),
+                      ),
                       onPressed: () {},
                     ),
                   ),
@@ -270,7 +279,10 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
                 for (int i = 0; i < 100; i++)
                   Container(
                     margin: const EdgeInsets.only(top: 40),
-                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 40,
+                    ),
                     color: i.isEven ? Colors.blue.shade200 : Colors.black12,
                     child: Text(i.toString()),
                   ),
