@@ -1,3 +1,6 @@
+## Unreleased
+- Bump dependencies.
+
 ## 1.1.0
 - Adhere to netglade_analysis 4.0.0
 - Update Dart SDK constraints

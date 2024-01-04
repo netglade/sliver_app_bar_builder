@@ -45,6 +45,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   ///
   /// [initialContentHeight] must also be defined.
   /// {@endtemplate}
+  // ignore: prefer-correct-callback-field-name, public api
   final ExpandRatioBuilderContentCallback? contentBuilder;
 
   /// {@template SliverAppBarBuilderDelegate.contentHeight}
