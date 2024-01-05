@@ -37,6 +37,7 @@ class SliverAppBarBuilder extends StatelessWidget {
   final double? initialBarHeight;
 
   /// {@macro SliverAppBarBuilderDelegate.contentBuilder}
+  // ignore: prefer-correct-callback-field-name, public api
   final ExpandRatioBuilderContentCallback? contentBuilder;
 
   /// {@macro SliverAppBarBuilderDelegate.contentHeight}
