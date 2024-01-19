@@ -7,6 +7,38 @@ import 'package:storybook_flutter/storybook_flutter.dart';
 class MultilineToOneLineStory extends StatelessWidget {
   const MultilineToOneLineStory({super.key});
 
+  double _leftPaddingForExpandRatio(double expandRatio) {
+    return 10 + (1 - expandRatio) * 40;
+  }
+
+  TextStyle _styleForExpandRatio({required double expandRatio, required double knobFontSize}) {
+    return TextStyle(
+      fontSize: knobFontSize + expandRatio * 10,
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  double _heightFromPainterForExpandRatio({
+    required BuildContext context,
+    required double expandRatio,
+    required String knobText,
+    required double knobFontSize,
+  }) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final paddingSpace = EdgeInsets.only(left: _leftPaddingForExpandRatio(expandRatio));
+
+    final painter = TextPainter()
+      ..text = TextSpan(
+        text: knobText,
+        style: _styleForExpandRatio(expandRatio: expandRatio, knobFontSize: knobFontSize),
+      )
+      ..textDirection = TextDirection.ltr
+      ..layout(maxWidth: screenWidth - paddingSpace.left * 2);
+
+    return painter.height;
+  }
+
   @override
   Widget build(BuildContext context) {
     // Bar.
@@ -30,13 +62,11 @@ class MultilineToOneLineStory extends StatelessWidget {
         .toDouble();
 
     // Content.
-
     final knobOneLineThreshold = context.knobs.slider(
       label: 'One line threshold',
       description: "Settings to this demo's contentBuilder font size.",
       initial: 0.9,
     );
-
     final knobFontSize = context.knobs
         .sliderInt(
           label: 'Font Size',
@@ -46,39 +76,18 @@ class MultilineToOneLineStory extends StatelessWidget {
           max: 30,
         )
         .toDouble();
-
     final knobText = context.knobs.text(
       label: 'Heading',
       description: "Settings to this demo's contentBuilder text.",
       initial: 'Some very long text that is multiline when expanded and one line when shrunken',
     );
 
-    TextStyle styleForExpandRatio(double expandRatio) {
-      return TextStyle(
-        fontSize: knobFontSize + expandRatio * 10,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      );
-    }
-
-    double leftPaddingForExpandRatio(double expandRatio) {
-      return 10 + (1 - expandRatio) * 40;
-    }
-
-    TextPainter painterForExpandRatio(double expandRatio) {
-      final screenWidth = MediaQuery.sizeOf(context).width;
-      final paddingSpace = EdgeInsets.only(left: leftPaddingForExpandRatio(expandRatio));
-
-      return TextPainter()
-        ..text = TextSpan(
-          text: knobText,
-          style: styleForExpandRatio(expandRatio),
-        )
-        ..textDirection = TextDirection.ltr
-        ..layout(maxWidth: screenWidth - paddingSpace.left * 2);
-    }
-
-    final initialPainter = painterForExpandRatio(1);
+    final initialHeight = _heightFromPainterForExpandRatio(
+      context: context,
+      expandRatio: 1,
+      knobText: knobText,
+      knobFontSize: knobFontSize,
+    );
 
     return Scaffold(
       body: CustomScrollView(
@@ -88,14 +97,19 @@ class MultilineToOneLineStory extends StatelessWidget {
             backgroundColorAll: Colors.lime,
             initialBarHeight: knobInitialBarHeight,
             pinned: true,
-            initialContentHeight: initialPainter.height,
+            initialContentHeight: initialHeight,
             leadingActionsPadding: const EdgeInsets.symmetric(horizontal: 8),
             collapseTrailingActions: true,
             trailingActionsPadding: const EdgeInsets.symmetric(horizontal: 8),
             contentBuilder: (context, expandRatio, contentHeight, centerPadding, overlapsContent) {
-              final paddingSpace = centerPadding.copyWith(left: leftPaddingForExpandRatio(expandRatio));
-              final textStyle = styleForExpandRatio(expandRatio);
-              final textPainter = painterForExpandRatio(expandRatio);
+              final paddingSpace = centerPadding.copyWith(left: _leftPaddingForExpandRatio(expandRatio));
+              final textStyle = _styleForExpandRatio(expandRatio: expandRatio, knobFontSize: knobFontSize);
+              final textHeight = _heightFromPainterForExpandRatio(
+                context: context,
+                expandRatio: expandRatio,
+                knobText: knobText,
+                knobFontSize: knobFontSize,
+              );
 
               return Stack(
                 children: [
@@ -104,7 +118,7 @@ class MultilineToOneLineStory extends StatelessWidget {
                     height: contentHeight,
                     padding: paddingSpace,
                     child: AnimatedContainer(
-                      height: expandRatio > knobOneLineThreshold ? textPainter.height : knobBarHeight,
+                      height: expandRatio > knobOneLineThreshold ? textHeight : knobBarHeight,
                       alignment: Alignment.centerLeft,
                       curve: Curves.fastOutSlowIn,
                       duration: const Duration(milliseconds: 200),
