@@ -36,6 +36,7 @@ jobs:
           email: ${{ secrets.DCM_EMAIL }}
           folders: .
           fatal_style: true
+          fatal_performance: true
           fatal_warnings: true
 
       - name: Test
