@@ -43,7 +43,7 @@ screenshots/api/
 # IDEs
 .idea/
 **/*.iml
-.vscode/
+.vscode/*
 !.vscode/launch.json
 !.vscode/settings.json
 
@@ -51,3 +51,6 @@ screenshots/api/
 **/*.g.dart
 **/*.freezed.dart
 lib/generated/
+
+# FVM Version Cache
+.fvm/

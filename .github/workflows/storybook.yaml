@@ -21,13 +21,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./example
 
     environment:
       name: github-pages
@@ -36,25 +31,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configure FVM
-        uses: kuhnroyal/flutter-fvm-config-action@v2
+      # The `flutter-actions/setup-fvm` action is documented as not working, so
+      # FVM is installed with the official script (into ~/fvm/bin, no sudo).
+      - name: Install FVM
+        run: |
+          curl -fsSL https://fvm.app/install.sh | bash -s -- 4.1.0
+          echo "$HOME/fvm/bin" >> "$GITHUB_PATH"
+
+      - name: Cache Flutter SDK
+        uses: actions/cache@v4
         with:
-          path: 'example/.fvm/fvm_config.json'
+          path: ~/fvm/versions
+          key: fvm-${{ runner.os }}-${{ hashFiles('.fvmrc') }}
+
+      # Installs the Flutter version pinned in .fvmrc; `example` has no config of
+      # its own, so FVM resolves the repository root one.
       - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
-          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+        run: fvm install --skip-pub-get
 
       - name: Build Storybook for Web
-        run: flutter build web --base-href "/sliver_app_bar_builder/"
+        working-directory: ./example
+        run: fvm flutter build web --base-href "/sliver_app_bar_builder/"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: 'example/build/web/'
       - name: Deploy to GitHub Pages
         id: deployment

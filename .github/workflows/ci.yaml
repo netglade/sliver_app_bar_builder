@@ -12,35 +12,50 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.8.0
 
+      # The `flutter-actions/setup-fvm` action is documented as not working, so
+      # FVM is installed with the official script (into ~/fvm/bin, no sudo).
+      - name: Install FVM
+        run: |
+          curl -fsSL https://fvm.app/install.sh | bash -s -- 4.1.0
+          echo "$HOME/fvm/bin" >> "$GITHUB_PATH"
+
+      - name: Cache Flutter SDK
+        uses: actions/cache@v4
+        with:
+          path: ~/fvm/versions
+          key: fvm-${{ runner.os }}-${{ hashFiles('.fvmrc') }}
+
+      # Installs the Flutter version pinned in .fvmrc and links .fvm/flutter_sdk,
+      # which is what Melos uses as its sdkPath.
+      - name: Install Flutter
+        run: fvm install --skip-pub-get
+
+      # Resolves the root package and, through the Flutter tool, `example`.
       - name: Install Dependencies
-        run: flutter pub get
+        run: fvm flutter pub get
 
       - name: Format
-        run: dart format --line-length 120 --set-exit-if-changed .
+        run: fvm dart run melos run lint:format
 
       - name: Flutter Analyze
-        run: flutter analyze --no-pub --fatal-infos --fatal-warnings
+        run: fvm dart run melos run lint:dart
 
+      # Installs the DCM version pinned in dcm_global.yaml.
       - name: Install DCM
-        uses: CQLabs/setup-dcm@v1
+        uses: CQLabs/setup-dcm@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version: auto
 
       - name: Run DCM
-        uses: CQLabs/dcm-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          ci_key: ${{ secrets.DCM_KEY }}
-          email: ${{ secrets.DCM_EMAIL }}
-          folders: .
-          fatal_style: true
-          fatal_performance: true
-          fatal_warnings: true
+        env:
+          DCM_CI_KEY: ${{ secrets.DCM_KEY }}
+          DCM_EMAIL: ${{ secrets.DCM_EMAIL }}
+        run: fvm dart run melos run lint:dcm
 
       - name: Test
-        run: flutter test --no-pub --test-randomize-ordering-seed random
+        run: fvm dart run melos run test
 
       - name: Dry Publish
-        run: dart pub publish --dry-run
+        run: fvm dart pub publish --dry-run

@@ -18,4 +18,47 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  melos: ^8.5.0
   netglade_analysis: ^7.0.0
+
+melos:
+  # The published package lives in the repository root, so the root itself is
+  # the (only) Melos package; `example` is analyzed through the root scripts.
+  useRootAsPackage: true
+
+  # Scripts run against the FVM-pinned SDK (see .fvmrc), so `flutter`/`dart`
+  # inside them never depend on what is on the PATH. Set MELOS_SDK_PATH=auto
+  # (or pass --sdk-path auto) to use the SDK from the PATH instead.
+  sdkPath: .fvm/flutter_sdk
+
+  scripts:
+    lint:all:
+      description: Run all static analysis checks.
+      steps:
+        - lint:format
+        - lint:dart
+        - lint:dcm
+
+    lint:format:
+      description: Verify formatting without writing changes.
+      run: dart format --line-length 120 --set-exit-if-changed .
+
+    lint:dart:
+      description: Run Dart/Flutter static analysis checks.
+      run: flutter analyze --no-pub --fatal-infos --fatal-warnings
+
+    lint:dcm:
+      # DCM is configured from the repository root (see analysis_options.yaml
+      # and dcm_global.yaml), so it runs once over the whole repository,
+      # including `example`. `dcm analyze` only supports the style and warning
+      # fatal flags; there is no --fatal-performance (that was what broke CI).
+      description: Run DCM static analysis checks.
+      run: dcm analyze . --fatal-style --fatal-warnings
+
+    format:
+      description: Format all Dart code.
+      run: dart format --line-length 120 .
+
+    test:
+      description: Run all tests.
+      run: flutter test --no-pub --test-randomize-ordering-seed random
