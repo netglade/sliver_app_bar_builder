@@ -7,7 +7,6 @@ void main() {
   runApp(const StorybookApp());
 }
 
-// ignore: prefer-match-file-name, ok for example
 class StorybookApp extends StatelessWidget {
   const StorybookApp({super.key});
 

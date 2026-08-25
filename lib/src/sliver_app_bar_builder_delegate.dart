@@ -45,7 +45,6 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   ///
   /// [initialContentHeight] must also be defined.
   /// {@endtemplate}
-  // ignore: prefer-correct-callback-field-name, public api
   final ExpandRatioBuilderContentCallback? contentBuilder;
 
   /// {@template SliverAppBarBuilderDelegate.contentHeight}
@@ -237,7 +236,9 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
                     constraints: const BoxConstraints.expand(),
                     color: debug ? Colors.deepPurple.withValues(alpha: 0.5) : null,
                     padding: contentPadding,
-                    // Wrap prevents overflow.
+                    // Wrap prevents overflow: it gives the content loose
+                    // constraints and clips it instead of overflowing.
+                    // ignore: avoid-single-child-column-or-row, intended
                     child: Wrap(
                       alignment: WrapAlignment.center,
                       clipBehavior: Clip.hardEdge,

@@ -206,7 +206,7 @@ class _PlayWithParametersStoryState extends State<PlayWithParametersStory> {
                     alignment: Alignment.centerLeft,
                     height: contentHeight,
                     padding: centerPadding.copyWith(
-                      left: 10 + (1 - expandRatio) * 40,
+                      left: (1 - expandRatio) * 40 + 10,
                     ),
                     child: Text(
                       knobText,
