@@ -45,7 +45,6 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
   ///
   /// [initialContentHeight] must also be defined.
   /// {@endtemplate}
-  // ignore: prefer-correct-callback-field-name, public api
   final ExpandRatioBuilderContentCallback? contentBuilder;
 
   /// {@template SliverAppBarBuilderDelegate.contentHeight}
@@ -214,7 +213,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
 
         return Container(
           constraints: const BoxConstraints.expand(),
-          color: debug ? Colors.yellow.withOpacity(0.5) : backgroundColorAll,
+          color: debug ? Colors.yellow.withValues(alpha: 0.5) : backgroundColorAll,
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -224,7 +223,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
                 left: 0,
                 right: 0,
                 child: Container(
-                  color: debug ? Colors.red.withOpacity(0.5) : backgroundColorBar,
+                  color: debug ? Colors.red.withValues(alpha: 0.5) : backgroundColorBar,
                   height: viewPadding.top + barHeightTransformed,
                 ),
               ),
@@ -235,9 +234,11 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
                   top: contentTopOffsetTransformed.toDouble(),
                   child: Container(
                     constraints: const BoxConstraints.expand(),
-                    color: debug ? Colors.deepPurple.withOpacity(0.5) : null,
+                    color: debug ? Colors.deepPurple.withValues(alpha: 0.5) : null,
                     padding: contentPadding,
-                    // Wrap prevents overflow.
+                    // Wrap prevents overflow: it gives the content loose
+                    // constraints and clips it instead of overflowing.
+                    // ignore: avoid-single-child-column-or-row, intended
                     child: Wrap(
                       alignment: WrapAlignment.center,
                       clipBehavior: Clip.hardEdge,
@@ -265,7 +266,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
                         left: 0,
                         right: 0,
                         child: Container(
-                          color: Colors.red.withOpacity(0.5),
+                          color: Colors.red.withValues(alpha: 0.5),
                           height: barHeightTmp,
                         ),
                       ),
@@ -275,7 +276,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
                       top: collapseTrailingActions ? (-expandRatio * barHeightTmp) : 0,
                       right: 0,
                       child: Container(
-                        color: debug ? Colors.green.withOpacity(0.5) : null,
+                        color: debug ? Colors.green.withValues(alpha: 0.5) : null,
                         height: collapseTrailingActions ? barHeightTmp : barHeightTransformed,
                         padding: trailingActionsPadding,
                         // Wrap prevents overflow.
@@ -299,7 +300,7 @@ class SliverAppBarBuilderDelegate extends SliverPersistentHeaderDelegate {
                       top: collapseLeadingActions ? (-expandRatio * barHeightTmp) : 0,
                       left: 0,
                       child: Container(
-                        color: debug ? Colors.orange.withOpacity(0.5) : null,
+                        color: debug ? Colors.orange.withValues(alpha: 0.5) : null,
                         height: collapseLeadingActions ? barHeightTmp : barHeightTransformed,
                         padding: leadingActionsPadding,
                         // Wrap prevents overflow.

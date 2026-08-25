@@ -8,7 +8,7 @@ class MultilineToOneLineStory extends StatelessWidget {
   const MultilineToOneLineStory({super.key});
 
   double _leftPaddingForExpandRatio(double expandRatio) {
-    return 10 + (1 - expandRatio) * 40;
+    return (1 - expandRatio) * 40 + 10;
   }
 
   TextStyle _styleForExpandRatio({required double expandRatio, required double knobFontSize}) {
@@ -25,7 +25,7 @@ class MultilineToOneLineStory extends StatelessWidget {
     required String knobText,
     required double knobFontSize,
   }) {
-    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenWidth = MediaQuery.widthOf(context);
     final paddingSpace = EdgeInsets.only(left: _leftPaddingForExpandRatio(expandRatio));
 
     final painter = TextPainter()

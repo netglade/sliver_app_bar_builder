@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Example (storybook) - Chrome",
+      "request": "launch",
+      "type": "dart",
+      "program": "example/lib/main.dart",
+      "cwd": "example",
+      "deviceId": "chrome"
+    },
+    {
+      "name": "Example (storybook) - Chrome (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "program": "example/lib/main.dart",
+      "cwd": "example",
+      "deviceId": "chrome",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "Example (storybook) - web-server",
+      "request": "launch",
+      "type": "dart",
+      "program": "example/lib/main.dart",
+      "cwd": "example",
+      "deviceId": "web-server"
+    }
+  ]
+}

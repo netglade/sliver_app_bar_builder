@@ -78,7 +78,7 @@ CustomScrollView(
         }
       ],
       initialContentHeight: 150,
-      contentBuilder: (context, expandRatio, contentHeight, overlapsContent) {
+      contentBuilder: (context, expandRatio, contentHeight, centerPadding, overlapsContent) {
         return Container(
           alignment: Alignment.centerLeft,
           height: 60,
@@ -98,6 +98,33 @@ CustomScrollView(
 );
 ```
 
+## Development
+
+Flutter is pinned with [FVM] in `.fvmrc` (currently 3.41.5):
+
+```sh
+fvm install
+fvm flutter pub get
+```
+
+The repository uses [Melos] as a task runner (the published package lives in the repository root,
+so the root itself is the only Melos package). Melos is configured with `sdkPath: .fvm/flutter_sdk`,
+so scripts always run against the pinned SDK:
+
+```sh
+fvm dart run melos run lint:all      # format check + flutter analyze + DCM
+fvm dart run melos run lint:format   # dart format --set-exit-if-changed
+fvm dart run melos run lint:dart     # flutter analyze
+fvm dart run melos run lint:dcm      # dcm analyze
+fvm dart run melos run format        # write formatting
+fvm dart run melos run test          # flutter test
+```
+
+Run `fvm dart run melos run --list` to see all scripts. CI runs the very same commands; where FVM
+is not available, set `MELOS_SDK_PATH=auto` to run the scripts against the SDK on the `PATH`.
+
+`lint:dcm` needs the [DCM] CLI on the `PATH`; the version used by CI is pinned in `dcm_global.yaml`.
+
 [storybook_image_link]: https://github.com/netglade/sliver_app_bar_builder/raw/main/screenshots/storybook.png
 [storybook_demo_link]: https://netglade.github.io/sliver_app_bar_builder
 
@@ -113,3 +140,7 @@ CustomScrollView(
 [style_badge_link]: https://pub.dev/packages/netglade_analysis
 [discord_badge]: https://img.shields.io/discord/1091460081054400532.svg?logo=discord&color=blue
 [discord_badge_link]: https://discord.gg/sJfBBuDZy4
+
+[FVM]: https://fvm.app
+[Melos]: https://melos.invertase.dev
+[DCM]: https://dcm.dev
