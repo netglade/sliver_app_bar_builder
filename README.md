@@ -78,7 +78,7 @@ CustomScrollView(
         }
       ],
       initialContentHeight: 150,
-      contentBuilder: (context, expandRatio, contentHeight, overlapsContent) {
+      contentBuilder: (context, expandRatio, contentHeight, centerPadding, overlapsContent) {
         return Container(
           alignment: Alignment.centerLeft,
           height: 60,

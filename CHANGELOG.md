@@ -1,6 +1,9 @@
 ## Unreleased
 - Bump dependencies.
 
+## 1.1.1
+- Fix `contentBuilder` signature in README example.
+
 ## 1.1.0
 - Adhere to netglade_analysis 4.0.0
 - Update Dart SDK constraints
